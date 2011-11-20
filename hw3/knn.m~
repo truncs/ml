@@ -1,0 +1,11 @@
+function [index] = knn(Y, x, k)
+
+% This function calculates the 
+% euclidean distance of x (vector)
+% with each row of Y (Y is a matrix
+% where each row corresponds to the 
+% vector of point. The function returns
+% the index of k nearest neighbor of x.
+
+C = zeros(si)
+					  
