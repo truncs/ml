@@ -16,7 +16,16 @@ function[gain] = informationGain(counts)
 	class_sum = sum(counts(i,:));
 	p_factor = counts(i,1) / class_sum;
 	n_factor = counts(i,2) / class_sum;
-	gain += (class_sum / total_samples) * ( - p_factor * log2(p_factor) - n_factor*log2(n_factor)); 
+	
+	% Hack so that octave doesn't return NaN if any of the *_factor values are zero
+
+	if (p_factor != 0 && n_factor != 0)
+	  gain += (class_sum / total_samples) * ( - p_factor * log2(p_factor) - n_factor*log2(n_factor));
+	elseif(p_factor != 0 && n_factor == 0)
+	  gain += (class_sum / total_samples) * ( - p_factor * log2(p_factor));
+	elseif(p_factor == 0 && n_factor != 0)
+	  gain += (class_sum / total_samples) * ( n_factor * log2(n_factor));
+	end
   end
 
 end

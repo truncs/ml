@@ -14,11 +14,12 @@
 % binary classification and 1 stands for negative example
 % and 2 stands for positive.
 
-function[positive_negative_count] = paritionAndCount(output_samples, input_samples,input_classes)
+function[positive_negative_count,x] = partitionAndCount(output_samples, input_samples,input_classes, attribute)
   
 % Initialize the returned matrix
   positive_negative_count = zeros(size(input_classes,1), 2);
-
+  x = struct();
+  
   for i=1:size(input_classes,1)
 
 	% Parition the input set based on the inptut class value 
@@ -30,7 +31,10 @@ function[positive_negative_count] = paritionAndCount(output_samples, input_sampl
 	% Get the number of the positive and the negative samples
 	p = sum(temp == 2);
 	n = sum(temp == 1);
-
+	x = setfield(x, strcat(attribute, num2str(i)), partition_indexes);
+	%temp
 	positive_negative_count(i,:) = [p n];
 	
   end
+
+end
