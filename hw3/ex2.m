@@ -18,6 +18,7 @@ attribute_values.wind = input_data(:,5);
 attribute_values.magnitude = input_data(:,6);
 attribute_values.visibility = input_data(:,7);
 
+
 decisionTreeWithInformationGain(output_class, attribute_values, 'noauto', [1:size(output_class,1)], attribute_class);
 
 
