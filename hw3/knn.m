@@ -25,9 +25,9 @@ function [knn_index] = knn(Y, x, k)
 
 % calculate the 3 nearest neighbor
   for i=1:k
-	[val,min_index] = min(C)
+	[value,min_index] = min(C);
 	knn_index(i) = min_index;
-	C(min_index) = [];
+	C(min_index) = NaN;
   end
 	
   

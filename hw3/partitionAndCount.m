@@ -14,7 +14,7 @@
 % binary classification and 1 stands for negative example
 % and 2 stands for positive.
 
-function[positive_negative_count,x] = partitionAndCount(output_samples, input_samples,input_classes, attribute)
+function[positive_negative_count,x] = partitionAndCount(output_samples, input_samples,input_classes, attribute, indexes)
   
 % Initialize the returned matrix
   positive_negative_count = zeros(size(input_classes,1), 2);
@@ -24,7 +24,10 @@ function[positive_negative_count,x] = partitionAndCount(output_samples, input_sa
 
 	% Parition the input set based on the inptut class value 
 	partition_indexes = find(input_samples == input_classes(i));
-
+	partition_indexes = intersect(indexes, partition_indexes);
+	if(size(partition_indexes,2) > 1)
+	  partition_indexes = partition_indexes';
+	end
 	% Get the corresponding output class values
 	temp = output_samples(partition_indexes);
 

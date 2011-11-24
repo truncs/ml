@@ -4,11 +4,11 @@
 % and negative sample per row for each class 
 % For ex. Class 1 will have have the [p n] on row 1 and so on
 
-function[gain] = informationGain(counts)
+function[gain, intrinsic_value] = informationGain(counts)
 
   % Initialize gain
   gain = 0;
-
+  intrinsic_value = 0;
   % Total number of samples in all the class 
   total_samples = sum(sum(counts));
 
@@ -17,6 +17,7 @@ function[gain] = informationGain(counts)
 	p_factor = counts(i,1) / class_sum;
 	n_factor = counts(i,2) / class_sum;
 	
+	intrinsic_value += - class_sum / total_samples * log2(class_sum/total_samples);
 	% Hack so that octave doesn't return NaN if any of the *_factor values are zero
 
 	if (p_factor != 0 && n_factor != 0)
